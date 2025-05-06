@@ -7,4 +7,4 @@ while read -r repo; do
   if [[ $repo == https://github.com/* ]]; then
     git clone "$repo"
   fi
-done < repo_list.txt
+done < ../repo_list.txt
