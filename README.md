@@ -2,38 +2,15 @@
 all turbowarp project with patch, there might rewrite for the jit 
 
 
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-https://github.com/TurboWarp/extensions.git
-https://github.com/TurboWarp/packager-extras.git
-https://github.com/TurboWarp/cloud-server.git
-https://github.com/TurboWarp/desktop.git
-https://github.com/TurboWarp/docs
-https://github.com/TurboWarp/scaffolding.git
-https://github.com/TurboWarp/json.git
-https://github.com/TurboWarp/scratch-audio.git
-https://github.com/TurboWarp/scratch-paint.git
-https://github.com/TurboWarp/scratch-storage.git
-https://github.com/TurboWarp/mist.git
-https://github.com/TurboWarp/scratch-render-fonts.git
-https://github.com/TurboWarp/scratch-render.git
-https://github.com/TurboWarp/scratch-svg-renderer.git
-https://github.com/TurboWarp/types.git
-https://github.com/TurboWarp/mirror.git
-https://github.com/TurboWarp/paper.js.git
-https://github.com/TurboWarp/scratch-parser.git
-https://github.com/TurboWarp/scratch-translate-extension-languages-mirror.git
-https://github.com/TurboWarp/unpackager.git
-https://github.com/TurboWarp/nanolog.git
-https://github.com/TurboWarp/docs.git
-https://github.com/TurboWarp/scratch-gui.git
-https://github.com/TurboWarp/scratch-blocks.git
-https://github.com/TurboWarp/sb3fix.git
-https://github.com/TurboWarp/trampoline.git
-https://github.com/TurboWarp/turbowarp.org.git
-https://github.com/TurboWarp/packager.git
-https://github.com/TurboWarp/types-tw.git
-https://github.com/TurboWarp/scratch-vm.git
-https://github.com/TurboWarp/addons.git
-https://github.com/TurboWarp/scratch-l10n.git
-https://github.com/TurboWarp/winget-pkgs.git
-https://github.com/TurboWarp/scratchblocks.git
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+
+wasm-pack build
+
+
+npm install cross-fetch
+npm install babel-plugin-react-intl --save-dev
+
+npm run prepublish
