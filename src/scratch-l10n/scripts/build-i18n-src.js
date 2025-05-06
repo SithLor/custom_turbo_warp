@@ -30,12 +30,12 @@ let defaultMessages = glob.sync(MESSAGES_PATTERN)
     .map((filename) => fs.readFileSync(filename, 'utf8'))
     .map((file) => JSON.parse(file))
     .reduce((collection, descriptors) => {
-        descriptors.forEach(({id, defaultMessage, description}) => {
+        descriptors.forEach(({ id, defaultMessage, description }) => {
             if (Object.prototype.hasOwnProperty.call(collection, id)) {
                 throw new Error(`Duplicate message id: ${id}`);
             }
 
-            collection[id] = {message: defaultMessage, description: description};
+            collection[id] = { message: defaultMessage, description: description };
         });
 
         return collection;

@@ -12,7 +12,7 @@ const postcssVars = require('postcss-simple-vars');
 const postcssImport = require('postcss-import');
 
 const STATIC_PATH = process.env.STATIC_PATH || '/static';
-const {APP_NAME} = require('./src/lib/brand');
+const { APP_NAME } = require('./src/lib/brand');
 
 const root = process.env.ROOT || '';
 if (root.length > 0 && !root.endsWith('/')) {
@@ -40,11 +40,11 @@ const base = {
         // allows ROUTING_STYLE=wildcard to work properly
         historyApiFallback: {
             rewrites: [
-                {from: /^\/\d+\/?$/, to: '/index.html'},
-                {from: /^\/\d+\/fullscreen\/?$/, to: '/fullscreen.html'},
-                {from: /^\/\d+\/editor\/?$/, to: '/editor.html'},
-                {from: /^\/\d+\/embed\/?$/, to: '/embed.html'},
-                {from: /^\/addons\/?$/, to: '/addons.html'}
+                { from: /^\/\d+\/?$/, to: '/index.html' },
+                { from: /^\/\d+\/fullscreen\/?$/, to: '/fullscreen.html' },
+                { from: /^\/\d+\/editor\/?$/, to: '/editor.html' },
+                { from: /^\/\d+\/embed\/?$/, to: '/embed.html' },
+                { from: /^\/addons\/?$/, to: '/addons.html' }
             ]
         }
     },
@@ -81,7 +81,8 @@ const base = {
                 babelrc: false,
                 plugins: [
                     ['react-intl', {
-                        messagesDir: './translations/messages/'
+                        "extractSourceLocation": true,
+                        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
                     }]],
                 presets: ['@babel/preset-env', '@babel/preset-react']
             }

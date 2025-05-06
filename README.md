@@ -14,3 +14,6 @@ npm install cross-fetch
 npm install babel-plugin-react-intl --save-dev
 
 npm run prepublish
+npm install --save glob
+
+npm install --save glob -g
