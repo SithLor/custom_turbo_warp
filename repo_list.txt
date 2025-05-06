@@ -1,8 +1,3 @@
-# custom_turbo_warp
-all turbowarp project with patch, there might rewrite for the jit 
-
-
-
 https://github.com/TurboWarp/extensions.git
 https://github.com/TurboWarp/packager-extras.git
 https://github.com/TurboWarp/cloud-server.git
