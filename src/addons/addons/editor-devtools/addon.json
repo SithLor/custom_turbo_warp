@@ -1,0 +1,36 @@
+{
+  "editorOnly": true,
+  "name": "Developer tools",
+  "description": "Adds new menu options to the editor: copy/paste blocks, better clean up, and more!",
+  "credits": [
+    {
+      "name": "griffpatch"
+    }
+  ],
+  "settings": [
+    {
+      "dynamic": true,
+      "name": "Enhance \"Clean up Blocks\"",
+      "id": "enableCleanUpPlus",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "dynamic": true,
+      "name": "Paste blocks at mouse cursor",
+      "id": "enablePasteBlocksAtMouse",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "dynamicEnable": true,
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["projects"]
+    }
+  ],
+  "versionAdded": "1.0.0",
+  "tags": ["editor", "codeEditor", "recommended"],
+  "enabledByDefault": true
+}
