@@ -8,3 +8,6 @@ while read -r repo; do
     git clone "$repo"
   fi
 done < ../repo_list.txt
+
+
+# i fuck hate git
