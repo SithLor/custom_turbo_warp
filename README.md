@@ -17,3 +17,9 @@ npm run prepublish
 npm install --save glob
 
 npm install --save glob -g
+
+
+
+note for  folder 
+
+bun work great on scratch-vm 
