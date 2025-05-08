@@ -12,6 +12,9 @@
   "main": "./src/index.js",
   "browser": "./src/index.js",
   "scripts": {
+    "vite_build": "vite build",
+    "vite_dev": "vite",
+    "vite_dev:build": "vite build --watch",
     "build": "webpack --progress --colors --bail",
     "coverage": "tap ./test/{unit,integration}/*.js --coverage --coverage-report=lcov",
     "docs": "jsdoc -c .jsdoc.json",
@@ -60,6 +63,8 @@
   "devDependencies": {
     "@babel/core": "7.13.10",
     "@babel/preset-env": "7.14.8",
+    "@swc/core": "^1.11.24",
+    "@vitejs/plugin-legacy": "^6.1.1",
     "adm-zip": "0.4.11",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.2.2",
@@ -85,12 +90,19 @@
     "scratch-storage": "2.3.1",
     "script-loader": "0.7.2",
     "stats.js": "0.17.0",
+    "swc-loader": "^0.2.6",
     "tap": "16.2.0",
     "tiny-worker": "2.3.0",
     "uglifyjs-webpack-plugin": "1.2.7",
+    "vite": "^6.3.5",
+    "vite-plugin-static-copy": "^2.3.1",
     "webpack": "4.47.0",
     "webpack-cli": "3.1.0",
     "webpack-dev-server": "3.11.2"
   },
-  "private": true
+  "private": true,
+  "trustedDependencies": [
+    "core-js",
+    "es5-ext"
+  ]
 }

@@ -15,21 +15,29 @@ const base = {
         filename: '[name].js'
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            loader: 'babel-loader',
-            include: path.resolve(__dirname, 'src'),
-            query: {
-                presets: [['@babel/preset-env']]
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'swc-loader', // Use swc-loader instead of babel-loader
+                include: path.resolve(__dirname, 'src'),
+                options: {
+                    jsc: {
+                        parser: {
+                            syntax: 'ecmascript',
+                            jsx: false // Set to true if you use JSX
+                        },
+                        target: 'es2015' // Target ES2015+ for modern browsers
+                    }
+                }
+            },
+            {
+                test: /\.mp3$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'media/music/'
+                }
             }
-        },
-        {
-            test: /\.mp3$/,
-            loader: 'file-loader',
-            options: {
-                outputPath: 'media/music/'
-            }
-        }]
+        ]
     },
     plugins: []
 };
