@@ -1,6 +1,7 @@
-const html = require('htmlparser2');
-const decodeHtml = require('decode-html');
-
+///const html = require('htmlparser2');
+import html from 'htmlparser2';
+//const decodeHtml = require('decode-html');
+import decodeHtml from '../pkg/decode_html.ts';
 /**
  * Convert a part of a mutation DOM to a mutation VM object, recursively.
  * @param {object} dom DOM object for mutation tag.
