@@ -26,3 +26,8 @@ npm install swc-loader @swc/core --save-dev
 
 https://porffor.dev/
 https://porffor.dev/
+
+
+npm i @swc/wasm-web 
+
+npm install webassembly-loader --save-dev

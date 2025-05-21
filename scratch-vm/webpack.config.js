@@ -55,11 +55,22 @@ module.exports = [
             path: path.resolve('dist', 'web')
         },
         module: {
+            
             rules: base.module.rules.concat([
                 {
                     test: require.resolve('./src/index.js'),
                     loader: 'expose-loader?VirtualMachine'
-                }
+                },
+                {
+                    test: /\.wasm$/,
+                    type: "javascript/auto",
+                    use: [{
+                        loader: "webassembly-loader",
+                        options: {
+                            export: "async"
+                        }
+                    }]
+              }
             ])
         }
     }),
