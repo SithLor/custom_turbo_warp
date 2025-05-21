@@ -29,5 +29,5 @@ https://porffor.dev/
 
 
 npm i @swc/wasm-web 
-
 npm install webassembly-loader --save-dev
+npm install --save-dev string-replace-loader

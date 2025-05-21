@@ -12,7 +12,7 @@ const postcssVars = require('postcss-simple-vars');
 const postcssImport = require('postcss-import');
 
 const STATIC_PATH = process.env.STATIC_PATH || '/static';
-const {APP_NAME} = require('./src/lib/brand');
+const { APP_NAME } = require('./src/lib/brand');
 
 const root = process.env.ROOT || '';
 if (root.length > 0 && !root.endsWith('/')) {
@@ -40,11 +40,11 @@ const base = {
         // allows ROUTING_STYLE=wildcard to work properly
         historyApiFallback: {
             rewrites: [
-                {from: /^\/\d+\/?$/, to: '/index.html'},
-                {from: /^\/\d+\/fullscreen\/?$/, to: '/fullscreen.html'},
-                {from: /^\/\d+\/editor\/?$/, to: '/editor.html'},
-                {from: /^\/\d+\/embed\/?$/, to: '/embed.html'},
-                {from: /^\/addons\/?$/, to: '/addons.html'}
+                { from: /^\/\d+\/?$/, to: '/index.html' },
+                { from: /^\/\d+\/fullscreen\/?$/, to: '/fullscreen.html' },
+                { from: /^\/\d+\/editor\/?$/, to: '/editor.html' },
+                { from: /^\/\d+\/embed\/?$/, to: '/embed.html' },
+                { from: /^\/addons\/?$/, to: '/addons.html' }
             ]
         }
     },
@@ -66,52 +66,79 @@ const base = {
         }
     },
     module: {
-        rules: [{
-            test: /\.jsx?$/,
-            loader: 'babel-loader',
-            include: [
-                path.resolve(__dirname, 'src'),
-                /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
-                /node_modules[\\/]pify/,
-                /node_modules[\\/]@vernier[\\/]godirect/
-            ],
-            options: {
-                // Explicitly disable babelrc so we don't catch various config
-                // in much lower dependencies.
-                babelrc: false,
-                plugins: [
-                    ['react-intl', {
-                        messagesDir: './translations/messages/'
-                    }]],
-                presets: ['@babel/preset-env', '@babel/preset-react']
-            }
-        },
-        {
-            test: /\.css$/,
-            use: [{
-                loader: 'style-loader'
-            }, {
-                loader: 'css-loader',
-                options: {
-                    modules: true,
-                    importLoaders: 1,
-                    localIdentName: '[name]_[local]_[hash:base64:5]',
-                    camelCase: true
-                }
-            }, {
-                loader: 'postcss-loader',
-                options: {
-                    ident: 'postcss',
-                    plugins: function () {
-                        return [
-                            postcssImport,
-                            postcssVars,
-                            autoprefixer
-                        ];
+        rules: [
+            // ...existing code...
+            {
+                test: /\.wasm$/,
+                type: "javascript/auto",
+                use: [{
+                    loader: "webassembly-loader",
+                    options: {
+                        export: "async"
                     }
+                }],
+                // Add this to include .wasm in all node_modules, including linked ones
+                include: [
+                    path.resolve(__dirname, 'src'),
+                    path.resolve(__dirname, 'node_modules/@swc/wasm-web'),
+                    path.resolve(__dirname, 'node_modules/scratch-vm/node_modules/@swc/wasm-web')
+                ]
+            },
+            {
+                test: /@swc[\\/]wasm-web[\\/].*\.js$/,
+                loader: 'string-replace-loader',
+                options: {
+                    search: 'new URL\\([\'"]wasm_bg\\.wasm[\'"], import\\.meta\\.url\\)',
+                    replace: 'require("./wasm_bg.wasm")',
+                    flags: 'g'
                 }
+            },
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                include: [
+                    path.resolve(__dirname, 'src'),
+                    /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
+                    /node_modules[\\/]pify/,
+                    /node_modules[\\/]@vernier[\\/]godirect/
+                ],
+                options: {
+                    // Explicitly disable babelrc so we don't catch various config
+                    // in much lower dependencies.
+                    babelrc: false,
+                    plugins: [
+                        ['react-intl', {
+                            messagesDir: './translations/messages/'
+                        }]],
+                    presets: ['@babel/preset-env', '@babel/preset-react']
+                }
+            },
+            {
+                test: /\.css$/,
+                use: [{
+                    loader: 'style-loader'
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        modules: true,
+                        importLoaders: 1,
+                        localIdentName: '[name]_[local]_[hash:base64:5]',
+                        camelCase: true
+                    }
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        ident: 'postcss',
+                        plugins: function () {
+                            return [
+                                postcssImport,
+                                postcssVars,
+                                autoprefixer
+                            ];
+                        }
+                    }
+                }]
             }]
-        }]
     },
     plugins: [
         new CopyWebpackPlugin({
@@ -299,3 +326,6 @@ module.exports = [
             ])
         })) : []
 );
+new webpack.DefinePlugin({
+    'import.meta.url': JSON.stringify('')
+})
